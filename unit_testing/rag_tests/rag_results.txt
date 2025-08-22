@@ -1,0 +1,82 @@
+Scoring rubric (simple)
+
+1.0 = matches ground truth
+
+0.5 = generally correct but misses a key detail the question asks for
+
+0.0 = incorrect
+
+Per-question verdicts
+
+Plans + segments → 0.5 (listed plans & segments but didn’t map plan→segment)
+
+CAC by channel → 1.0
+
+Active/New/Churned (defs) → 1.0
+
+Max promo discount → 1.0
+
+Outbound email limit (14-day) → 1.0
+
+Stop-loss rule → 1.0
+
+SDR cadence → 1.0
+
+Referral incentive + EU restriction → 1.0
+
+Onboarding cadence + primary KPI → 1.0
+
+Dataset coverage + PK format → 1.0
+
+CM% def + typical range → 0.5 (gave 0–1 instead of typical ~0.45–0.75)
+
+CtS def + expected range → 0.5 (formula given; range missing)
+
+Chatbot Intent Expansion (EX-2025-03-01) → 0.0 (decision mismatched ground truth)
+
+Ads LP headline test outcome → 1.0
+
+Pro +5% price test summary → 1.0
+
+CM% definition & calc → 1.0
+
+CtS formula → 1.0
+
+Active/New/Churned (monthly) → 1.0
+
+Overall accuracy
+
+Sum = 15.5 / 18
+
+Accuracy = 86.1%
+
+Quick fixes to boost accuracy next run
+
+When a question asks for a range (e.g., CM% typical, CtS expected), return the numeric band from the doc.
+
+For mapping questions (plans → segments), explicitly map A→B.
+
+For experiments, include metrics + decision verbatim from the log.
+
+cosine similarity with gpt 5 output:
+[✓] 0.7088  #1
+[✓] 0.8027  #2
+[✓] 0.8391  #3
+[✓] 0.7067  #4
+[✓] 0.7987  #5
+[✓] 0.8138  #6
+[✓] 0.7269  #7
+[✓] 0.7866  #8
+[✓] 0.7522  #9
+[✓] 0.7951  #10
+[✓] 0.7938  #11
+[✓] 0.8034  #12
+[✓] 0.7103  #13
+[✓] 0.7892  #14
+[✓] 0.8205  #15
+[✓] 0.8311  #16
+[✓] 0.8405  #17
+[✓] 0.8107  #18
+Pairs: 18
+Avg cosine: 0.7850
+Accuracy : 0.70: 100.0%

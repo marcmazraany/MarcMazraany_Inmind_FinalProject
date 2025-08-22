@@ -1,0 +1,86 @@
+version: 1
+updated: 2025-08-14
+tags: [baseline, ground-truth, company, profile]
+
+company:
+  name: DemoCo 
+  description: 
+    B2B subscription SaaS offering workflow/collaboration tooling to SMB, Mid-Market,
+    and Enterprise customers. Subscription plans: Basic, Pro, Enterprise.
+    name: DemoCo description: B2B subscription SaaS offering workflow/collaboration tooling to SMB, Mid-Market, and Enterprise customers. Subscription plans: Basic, Pro, Enterprise.
+
+business_model:
+  type: SaaS
+  billing_cycle: monthly
+  currency: USD
+  payment_processors: [card]
+  payment_fee_rate: 0.025   # 2.5% of MRR
+
+products_plans:
+  - plan: Basic
+    target_segment: SMB
+    notes: limited features; self-serve onboarding
+  - plan: Pro
+    target_segment: Mid-Market
+    notes: fuller features; light success coverage
+  - plan: Enterprise
+    target_segment: Enterprise
+    notes: SSO, security & admin features, dedicated success
+
+markets:
+  segments: [SMB, Mid-Market, Enterprise]
+  regions: [MENA, EU, NA, APAC]
+  industries_primary: [SaaS, Fintech, E-commerce, EdTech, Healthcare]
+
+acquisition:
+  channels:
+    - name: Ads
+      type: paid
+      notes: search + social
+      typical_cac_usd: 120
+    - name: Organic
+      type: unpaid
+      notes: SEO/content
+      typical_cac_usd: 20
+    - name: Referral
+      type: incentivized
+      notes: customer referrals/partners
+      typical_cac_usd: 60
+    - name: Outbound
+      type: paid
+      notes: SDR-led, targeted lists
+      typical_cac_usd: 200
+  attribution_note: Single-touch by signup source (keep simple for v1).
+
+success_support:
+  support_cost_per_ticket_usd: 12      
+  tickets_driver_note: Tickets scale with active base; deflection reduces cost.
+  onboarding: email sequences + help center (baseline)
+
+infrastructure:
+  cost_model: per_active_customer
+  avg_infra_cost_per_active_usd_current: ~10   
+  notes: cache/CDN & compute are the main drivers
+
+data_sources:
+  kpi_primary: monthly_kpis_2015_2025.csv
+  kpi_table_name: monthly_kpis         # if using SQLite
+  kpi_asof_alignment: "use last month <= asof"
+  lineage_note: This file is the single source of truth for feasibility math.
+
+definitions_ground_rules:
+  active_customer: "Paying subscriber counted at end of month."
+  new_customer: "New paying subscriber whose first active month is the given month."
+  churned_customer: "Customer counted as churned in the month their subscription ends."
+  revenue_scope: "MRR only (no one-off/professional services)."
+  refunds_discounts: "Excluded from MRR at source; keep v1 simple."
+
+constraints_summary:
+  budget_caps: "Not enforced in feasibility; strategy may propose reallocation."
+  compliance_regions: "Assume standard SaaS restrictions; none blocking for v1."
+  pricing_policy: "Discounts allowed up to 15% list; Enterprise bespoke."
+
+ui_copy_guidance:
+  show_units: true
+  show_citations: true
+  default_timezone: UTC
