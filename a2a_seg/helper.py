@@ -24,8 +24,7 @@ from a2a.server.tasks import (
 )
 from a2a.utils import new_task, new_agent_text_message
 from a2a.utils.errors import ServerError
-# from lang_workflow import graph as Consultant  
-from lang_workflow import init_graph_and_tools, State
+from lang_workflow import create_graph_and_tools, State
 
 load_dotenv()
 
@@ -38,7 +37,7 @@ class ConsultantWrapper:
         if self.graph is None:
             async with self._lock:
                 if self.graph is None:
-                    self.graph = await init_graph_and_tools()
+                    self.graph = await create_graph_and_tools()
 
     async def run(self, query: str, context_id: str):
         await self._ensure_ready()

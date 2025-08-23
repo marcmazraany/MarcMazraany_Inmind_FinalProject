@@ -242,7 +242,7 @@ async def main():
 _sse_cm = None
 _client_session = None
 
-async def init_graph_and_tools():
+async def create_graph_and_tools():
     """Builds the graph once, binds MCP tools, and keeps the SSE session open."""
     global tool_map, web_llm, graph, rag_llm, plan_llm, _sse_cm, _client_session
 

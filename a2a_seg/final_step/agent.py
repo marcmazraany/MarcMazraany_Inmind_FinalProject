@@ -211,8 +211,8 @@ a2a_app = to_a2a(root_agent, port=8001)
 async def ADK_Run(query : str):
     APP_NAME = "Strategy_Consultant"
     agent = root_agent
-    USER_ID = "12345"
-    SESSION_ID = "123344"
+    USER_ID = ""
+    SESSION_ID = ""
 
     session_service = InMemorySessionService()
     session = await session_service.create_session(
@@ -221,13 +221,9 @@ async def ADK_Run(query : str):
     runner = Runner(
         agent=agent, app_name=APP_NAME, session_service=session_service
     )
-
     new_message = types.Content(
         role="user", parts=[types.Part(text=query)]
     )
-
-    session.state["user_query"] = query
-    session.state["context"] = ""
 
     async for event in runner.run_async(
         user_id=USER_ID,

@@ -3,8 +3,11 @@ from transformers import GPT2Tokenizer
 from transformers import GPT2ForSequenceClassification
 import evaluate
 from transformers import TrainingArguments, Trainer
+import pandas as pd
 
 dataset = load_dataset("mteb/tweet_sentiment_extraction")
+
+df = pd.DataFrame(dataset['train'])
 
 tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
 tokenizer.pad_token = tokenizer.eos_token
