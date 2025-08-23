@@ -21,7 +21,6 @@
 ---
 ## Table of Contents
 - [What this project does](#what-this-project-does)
-- [System at a glance](#system-at-a-glance)
 - [Core components](#core-components)
   - [1) MCP Server (SSE)](#1-mcp-server-sse)
   - [2) Data layer](#2-data-layer)
@@ -43,20 +42,6 @@ This project wires together two agent frameworks—**Google ADK** and **LangGrap
 The result is a composable “consulting assistant” that can reason over your data and the web using the same toolbelt.
 
 ---
-
-## System at a glance
-
-```text
-User
- └─► LangGraph "Consultant" workflow
-       ├─ Baseline node  ──► MCP RAG tool (FAISS + Gemini)
-       ├─ Competitor node ─► MCP web_search + fetch
-       ├─ Benchmark node  ─► MCP web_search + fetch
-       └─ (for KPI Q&A) ──► ADK nl2sql/sql_writer via A2A
-                              └─► SQLite (Company_data.db, table: monthly_kpis)
-```
-
-MCP Server (SSE)  ── tools: rag_tool, web_search_ddg, fetch, http_get_text, html_to_markdown
 # Core components
 
 ## 1) MCP Server (SSE)
@@ -228,3 +213,4 @@ Couldn't connect to fast api without huge changes or without severly delaying fa
 - Some issues were encountered while trying to connect the orchestrator to an endpoint. Difficulty trying to understand how sessions and adk runner works
 - Rag was suprisingly easy to connect.
 - Didn't connect the langgraph workflow alone since it was already tested during unit testing, and connecting to an endpoint might require way too much time.
+
