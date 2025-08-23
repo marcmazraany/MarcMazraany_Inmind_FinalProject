@@ -1,8 +1,6 @@
 # Final_Project_Inmind — Multi-Agent Analytics & Strategy Stack
 *(ADK × LangGraph × MCP with shared RAG, web tools & SQL toolkit)*
 
-> A composable “consulting assistant” that answers KPI questions from your SQLite DB and crafts grounded strategies by combining internal RAG with external web research—all through one cohesive workflow.
-
 ## check list: ✓ ✗
 
 1. Langgraph system:  ✓
@@ -36,7 +34,7 @@
 
 This project wires together two agent frameworks—**Google ADK** and **LangGraph**—so they can share the same tools (via an **MCP server**) and cooperate on two main jobs:
 
-1. **KPI analytics Q&A (NL → SQL → answer)**: turn natural-language questions into safe SQLite queries over `monthly_kpis`, run them, and return results.  
+1. **KPI analytics Q&A (NL → SQL → answer) & Feasibility Assessment**: turn natural-language questions into safe SQLite queries over `monthly_kpis`, run them, and return results. Then based on theses results and with access to the web assess feasibility.
 2. **Strategy & research workflow**: pull internal context via RAG, scan competitors on the web, fetch and validate sources, benchmark, and synthesize a plan.
 
 The result is a composable “consulting assistant” that can reason over your data and the web using the same toolbelt.
@@ -211,3 +209,4 @@ Couldn't connect to fast api without huge changes or without severly delaying fa
 - Some issues were encountered while trying to connect the orchestrator to an endpoint. Difficulty trying to understand how sessions and adk runner works
 - Rag was suprisingly easy to connect.
 - Didn't connect the langgraph workflow alone since it was already tested during unit testing, and connecting to an endpoint might require way too much time.
+
