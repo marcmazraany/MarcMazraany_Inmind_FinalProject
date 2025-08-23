@@ -1,4 +1,4 @@
-# Final_Project_Inmind — Multi-Agent Analytics & Strategy Stack
+# Final_Project_Inmind - Multi-Agent Analytics & Strategy Stack
 *(ADK × LangGraph × MCP with shared RAG, web tools & SQL toolkit)*
 
 ## check list: ✓ ✗
@@ -209,5 +209,6 @@ Couldn't connect to fast api without huge changes or without severly delaying fa
 - Some issues were encountered while trying to connect the orchestrator to an endpoint. Difficulty trying to understand how sessions and adk runner works
 - Rag was suprisingly easy to connect.
 - Didn't connect the langgraph workflow alone since it was already tested during unit testing, and connecting to an endpoint might require way too much time.
+
 
 
