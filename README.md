@@ -1,5 +1,7 @@
-# Final_Project_Inmind - Multi-Agent Analytics & Strategy Stack
+# Final_Project_Inmind — Multi-Agent Analytics & Strategy Stack
 *(ADK × LangGraph × MCP with shared RAG, web tools & SQL toolkit)*
+
+> A composable “consulting assistant” that answers KPI questions from your SQLite DB and crafts grounded strategies by combining internal RAG with external web research—all through one cohesive workflow.
 
 ## check list: ✓ ✗
 
@@ -14,7 +16,7 @@
 9. Fast API: ✓
 10. UI: ADK web (literally no benefits in using Gradio or chainlit in my project since i had both adk web and fast api)
 11. Automatic Tracing with langfuse: ✓
-12. Simple Fine-Tuning: ✓ (but not relevant to project)
+12. Simple Fine-Tuning: ✓ (but not as a part of the workflow)
 
 ---
 ## Table of Contents
@@ -32,14 +34,13 @@
 
 ## What this project does
 
-This project wires together two agent frameworks, **Google ADK** and **LangGraph**, so they can share the same tools (via an **MCP server**) and cooperate on two main jobs:
+This project wires together two agent frameworks—**Google ADK** and **LangGraph**—so they can share the same tools (via an **MCP server**) and cooperate on two main jobs:
 
-1. **KPI analytics Q&A (NL → SQL → answer) & Feasibility assessment**: turn natural-language questions into safe SQLite queries over `monthly_kpis`, run them, and return results. Then use thoses results along with access to the web to assess feasibility.
+1. **KPI analytics Q&A (NL → SQL → answer)**: turn natural-language questions into safe SQLite queries over `monthly_kpis`, run them, and return results.  
 2. **Strategy & research workflow**: pull internal context via RAG, scan competitors on the web, fetch and validate sources, benchmark, and synthesize a plan.
 
 The result is a composable “consulting assistant” that can reason over your data and the web using the same toolbelt.
 
----
 # Core components
 
 ## 1) MCP Server (SSE)
@@ -78,7 +79,7 @@ A single MCP server (“**combined-fast-mcp**”) exposes shared tools to both a
   
 - **Agents:** Orchestrator (root_agent), Data Analyst Agent, nl2sql Agent, Feasibility Agent, Adjustment Agent, and Consultant Agent.  
 
-![alt text](image.png) 
+![alt text](images/Final_workflow.png)
 
 **Workflow Explanation**
 - `adk_root_agent` is the orchestrator that communicate the flow of the workflow. It is connected to 3 agent tools: Feasibility agent, data analyst agent, and Consulting Agent.
@@ -98,7 +99,7 @@ A single MCP server (“**combined-fast-mcp**”) exposes shared tools to both a
 - **Benchmark node:** Deep-dives on selected competitors using the same web toolchain to extract practices, pricing, positioning, and other evidence.  
 - **Plan Node:** Using the web search and fetch tool, develops a strategy to reach the user's goal.
 
-![alt text](graph_workflow.png)
+![alt text](images/graph_workflow.png)
 
 **A2A exposure:** The Langgraph agents are published via A2A so external clients (in this case adk) can call them as remote tools.
 
@@ -127,7 +128,7 @@ A single MCP server (“**combined-fast-mcp**”) exposes shared tools to both a
 ## Schema
 - Once I got the approval, the first step was developping a manual schema. This schema helped me assess the required agents, tools, and connections. It also helped me assess possible limitations, and determine the required synthetic data for the project. 
 
-![alt text](image-1.png)
+![alt text](images/adk_schema1.png)
 1st schema of the adk workflow.
 
 Changes Made:
@@ -136,8 +137,7 @@ Changes Made:
 - **Adjustment node** Agent tool of feasible instead. adjustments should only be made after the feasibility was assessed therefore it was logical to put it as a tool for the feasible node.
 
 - **Removed Understand Kpi node** the model is smart enough to understand the kpis alone without a rag pulling from some documents. **NOTE:** If more complex and complicated kpis are to be used, a rag and understand kpi node might be necessary.
-
-![alt text](image-3.png)
+![alt text](images/Langgraph_schema1.png)
 
 1st schema of the langgraph workflow.
 
@@ -211,7 +211,3 @@ Couldn't connect to fast api without huge changes or without severly delaying fa
 - Some issues were encountered while trying to connect the orchestrator to an endpoint. Difficulty trying to understand how sessions and adk runner works
 - Rag was suprisingly easy to connect.
 - Didn't connect the langgraph workflow alone since it was already tested during unit testing, and connecting to an endpoint might require way too much time.
-
-
-
-
